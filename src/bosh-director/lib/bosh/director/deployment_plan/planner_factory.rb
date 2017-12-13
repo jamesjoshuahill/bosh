@@ -127,6 +127,9 @@ module Bosh
           runtime_config_consolidator.tags(deployment_name).merge!(tags)
         end
 
+        # process link will actuall try to mix and match the links, here
+        # this is done through the link path
+        # is it the right place to even do that ??????????
         def process_links(deployment)
           errors = []
 

@@ -185,12 +185,14 @@ module Bosh::Director
         found_link_paths = []
 
         Models::LinkProvider.where(deployment: deployment, name: name).each do |lp|
+          raise 'find_link_path_with_name'
           content = JSON.parse(lp.content)
           if lp.shared && (!link_network || (content['networks'].include? link_network))
             #TODO extract instance_group name from top level element from `link_provider`
             found_link_paths.push({:deployment => deployment.name, :instance_group => lp.instance_group, :job => lp.owner_object_name, :name => name})
           end
         end
+
         if found_link_paths.size == 1
           return found_link_paths[0]
         elsif found_link_paths.size > 1

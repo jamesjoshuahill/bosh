@@ -178,6 +178,8 @@ module Bosh::Director
               raise "Job '#{template_name}' not found in Template table"
             end
 
+            # we need to add the providers and consumer here
+            # since that is where we know for sure all of our consumers and providers
             if current_template_model.consumes != nil
               current_template_model.consumes.each do |consumes|
                 job.add_link_from_release(@instance_group.name,'consumes', consumes["name"], consumes)
